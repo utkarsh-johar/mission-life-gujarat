@@ -1,0 +1,215 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  role          String         @default("CITIZEN") // CITIZEN | GEDA_ADMIN
+  displayName   String?
+  email         String?        @unique
+  locale        String         @default("en")
+  wardId        String?
+  ward          Ward?          @relation(fields: [wardId], references: [id])
+  isSeeded      Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  audits        BaselineAudit[]
+  trips         Trip[]
+  habits        HabitLog[]
+  ledger        CreditLedger[]
+  roofs         RoofProject[]
+  leads         SolarLead[]
+  streak        Streak?
+}
+
+model Ward {
+  id                  String               @id
+  name                String
+  city                String
+  pincode             String
+  discom              String               // UGVCL | DGVCL | MGVCL | PGVCL | TORRENT_POWER
+  centroidLat         Float
+  centroidLng         Float
+  estimatedHouseholds Int
+  users               User[]
+  aggregates          WardDailyAggregate[]
+
+  @@index([city])
+  @@index([pincode])
+}
+
+model PincodeMap {
+  pincode   String  @id
+  city      String
+  district  String
+  wardId    String?
+  discom    String
+  verified  Boolean @default(false)
+}
+
+model BaselineAudit {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  monthlyKwh          Float
+  cookingFuel         String
+  lpgCylindersPerYear Float?
+  pngScmPerMonth      Float?
+  commuteMode         String
+  dailyKm             Float
+  workingDays         Int
+  electricityKg       Float
+  cookingKg           Float
+  commuteKg           Float
+  totalKg             Float
+  source              String   // MANUAL | OCR | SAMPLE
+  factorsVersion      String   // pins config version for reproducibility
+  createdAt           DateTime @default(now())
+}
+
+model TariffPlanRecord {
+  id            String   @id
+  discom        String
+  asOf          DateTime
+  source        String
+  fixedCharge   Float
+  fuelSurcharge Float
+  dutyPct       Float
+  slabs         String   // JSON string
+}
+
+model RoofProject {
+  id                 String      @id @default(cuid())
+  userId             String
+  user               User        @relation(fields: [userId], references: [id])
+  geojson            String      // GeoJSON polygon string
+  areaSqM            Float
+  usableSqM          Float
+  systemKw           Float
+  annualKwh          Float
+  grossCost          Float
+  subsidy            Float
+  netCost            Float
+  paybackYears       Float
+  lat                Float
+  lng                Float
+  irradianceSnapshot String      // JSON string
+  createdAt          DateTime    @default(now())
+  leads              SolarLead[]
+}
+
+model Vendor {
+  id             String      @id
+  name           String
+  city           String
+  districts      String
+  minKw          Float
+  maxKw          Float
+  phone          String
+  website        String?
+  empanelmentRef String?
+  isSample       Boolean     @default(true)
+  leads          SolarLead[]
+}
+
+model SolarLead {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  vendorId  String
+  vendor    Vendor      @relation(fields: [vendorId], references: [id])
+  roofId    String
+  roof      RoofProject @relation(fields: [roofId], references: [id])
+  consent   Boolean
+  status    String      @default("NEW") // NEW | CONTACTED | QUOTE_SENT | CLOSED
+  createdAt DateTime    @default(now())
+}
+
+model Trip {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  idempotencyKey String   @unique
+  distanceKm     Float
+  movingSeconds  Int
+  avgKmh         Float
+  maxKmh         Float
+  detectedMode   String
+  confirmedMode  String?
+  confidence     Float
+  kgCo2Saved     Float
+  status         String   // VERIFIED | SUSPECT | PENDING
+  isSimulated    Boolean  @default(false)
+  wardId         String?
+  startedAt      DateTime
+}
+
+model HabitLog {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  ruleId         String
+  evidenceType   String?  // PHOTO | TICKET | AUTO_SENSOR
+  imageHash      String?
+  status         String   // PENDING | AUTO_VERIFIED | APPROVED | REJECTED
+  creditsAwarded Int      @default(0)
+  createdAt      DateTime @default(now())
+
+  @@index([imageHash])
+}
+
+model CreditLedger {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  delta     Int
+  reason    String
+  refId     String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Streak {
+  userId        String @id
+  user          User   @relation(fields: [userId], references: [id])
+  current       Int    @default(1)
+  best          Int    @default(1)
+  lastActiveDay String
+  freezes       Int    @default(1)
+}
+
+model WardDailyAggregate {
+  id          String   @id @default(cuid())
+  wardId      String
+  ward        Ward     @relation(fields: [wardId], references: [id])
+  day         String   // YYYY-MM-DD
+  activeUsers Int      @default(0)
+  kgCo2Saved  Float    @default(0)
+  kwhShifted  Float    @default(0)
+  greenKm     Float    @default(0)
+  polygons    Int      @default(0)
+  leads       Int      @default(0)
+
+  @@unique([wardId, day])
+}
+
+model ConfigConstant {
+  key    String   @id
+  value  String   // JSON string
+  source String
+  asOf   DateTime
+}
+
+model Campaign {
+  id         String   @id @default(cuid())
+  title      String
+  startsAt   DateTime
+  endsAt     DateTime
+  multiplier Float    @default(1.5)
+  wardIds    String?  // JSON string
+}

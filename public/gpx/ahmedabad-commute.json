@@ -1,0 +1,13 @@
+[
+  { "lat": 23.0353, "lng": 72.5283, "t": 0, "speed": 4.5, "mode": "WALK" },
+  { "lat": 23.0360, "lng": 72.5305, "t": 3, "speed": 5.0, "mode": "WALK" },
+  { "lat": 23.0371, "lng": 72.5342, "t": 6, "speed": 4.8, "mode": "WALK" },
+  { "lat": 23.0385, "lng": 72.5395, "t": 9, "speed": 12.0, "mode": "CYCLE" },
+  { "lat": 23.0398, "lng": 72.5450, "t": 12, "speed": 14.5, "mode": "CYCLE" },
+  { "lat": 23.0410, "lng": 72.5510, "t": 15, "speed": 13.8, "mode": "CYCLE" },
+  { "lat": 23.0402, "lng": 72.5562, "t": 18, "speed": 0.0, "mode": "STOP" },
+  { "lat": 23.0380, "lng": 72.5615, "t": 21, "speed": 28.0, "mode": "BUS" },
+  { "lat": 23.0350, "lng": 72.5680, "t": 24, "speed": 34.0, "mode": "BUS" },
+  { "lat": 23.0320, "lng": 72.5710, "t": 27, "speed": 31.0, "mode": "BUS" },
+  { "lat": 23.0305, "lng": 72.5701, "t": 30, "speed": 4.2, "mode": "WALK" }
+]

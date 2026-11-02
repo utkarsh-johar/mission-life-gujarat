@@ -1,0 +1,1308 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 7051
+>>
+stream
+0.5670000000000001 w
+0 G
+0.06 0.09 0.16 rg
+0. 841.8899999999999864 595.2755905511811534 -170.0787401574803255 re
+f
+0.05 0.58 0.53 rg
+0. 677.480551181102328 595.2755905511811534 -5.6692913385826778 re
+f
+BT
+/F2 10 Tf
+11.5 TL
+0.961 0.62 0.043 rg
+56.6929133858267775 785.1970866141732586 Td
+(GUJARAT ENERGY DEVELOPMENT AGENCY \(GEDA\) · HACKATHON 2026) Tj
+ET
+BT
+/F2 22 Tf
+25.2999999999999972 TL
+1. g
+56.6929133858267775 751.1813385826771992 Td
+(Mission LiFE Gujarat & EcoVerse) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.796 0.835 0.882 rg
+56.6929133858267775 722.8348818897637784 Td
+(Production-Grade Interactive Citizen Engagement & Clean Energy Platform) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.58 0.639 0.722 rg
+56.6929133858267775 700.15771653543311 Td
+(Problem ID: HC26-GEDA01 · Theme: Green Energy & Sustainability · Version: 1.0.0) Tj
+ET
+0.97 0.98 0.99 rg
+0.8 0.84 0.88 RG
+65.1968503937007995 637.7955118110236299 m
+530.0787401574804107 637.7955118110236299 l
+534.7753348804508278 637.7955118110236299 538.5826771653544256 633.9881695261200321 538.5826771653544256 629.291574803149615 c
+538.5826771653544256 544.2522047244093528 l
+538.5826771653544256 539.5556100014389358 533.8860824423838949 535.748267716535338 530.0787401574804107 535.748267716535338 c
+65.1968503937007995 535.748267716535338 l
+60.5002556707302688 535.748267716535338 56.6929133858267775 540.4448624395058687 56.6929133858267775 544.2522047244093528 c
+56.6929133858267775 629.291574803149615 l
+56.6929133858267775 633.9881695261200321 61.3895081087973011 637.7955118110236299 65.1968503937007995 637.7955118110236299 c
+h
+B
+BT
+/F2 10 Tf
+11.5 TL
+0.059 0.463 0.431 rg
+70.8661417322834666 617.952992125984224 Td
+(EXECUTIVE SUMMARY & CORE MISSION) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+70.8661417322834666 598.1104724409448181 Td
+(LiFE Gujarat operationalises Prime Minister Narendra Modi's Mission LiFE \(Lifestyle for Environment\) across the) Tj
+T* (state of Gujarat. The platform bridges the divide between macro-level climate pledges and micro-level daily habits) Tj
+T* (through four flagship modules and the EcoVerse gamified companion. Built with strict TypeScript, pure unit-tested) Tj
+T* (mathematical engines, real GERC tariffs, Esri satellite geometry, Open-Meteo irradiance, and zero fake appliance) Tj
+T* (sliders.) Tj
+ET
+0.06 0.46 0.43 rg
+56.6929133858267775 513.0711023622046696 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 496.0632283464566399 Td
+(1. Problem Context & Architectural Principles) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+493.4626771653543642 496.0632283464566399 Td
+([ Section 1 ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 479.0553543307086102 Td
+(While general awareness of climate change is high among Gujarat citizens, everyday consumers face severe) Tj
+T* (friction in adopting sustainable habits: \(1\) Awareness-to-Action Gap without personalised advice, \(2\)) Tj
+T* (One-Size-Fits-All Fallacy ignoring the constraints of students vs renters vs homeowners, \(3\) Invisible Impact where) Tj
+T* (conservation efforts feel unrewarded, and \(4\) Habit Fatigue without engaging social feedback loops.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 413.8585039370078107 Td
+(The Three Non-Negotiable Engineering Rules:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 396.850629921259781 Td
+(•  Zero Manual Sliders: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+161.2722047244094767 396.850629921259781 Td
+(Every calculation derives strictly from official DISCOM bills, client-side OCR, GPS telemetry,) Tj
+T* (or live physical APIs.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 365.6695275590550409 Td
+(•  Pure Mathematical Engine: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+187.552204724409421 365.6695275590550409 Td
+(All calculations live in decoupled, unit-tested engine modules \(/lib/engine/*\) with 100%) Tj
+T* (test coverage.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 334.4884251968503008 Td
+(•  Traceable Regulatory Data: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+187.3722047244094711 334.4884251968503008 Td
+(Tariffs derive directly from GERC 2024–25 orders; emission factors use CEA Version) Tj
+T* (20 \(0.82 kg CO2/kWh\); solar subsidies follow Central PM Surya Ghar CFA guidelines) Tj
+T* (\(up to Rs. 78,000 cap\).) Tj
+ET
+0.06 0.46 0.43 rg
+56.6929133858267775 286.2994488188975311 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 269.2915748031495013 Td
+(2. System Architecture & Tech Stack) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+493.4626771653543642 269.2915748031495013 Td
+([ Section 2 ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 252.2837007874014716 Td
+(The platform is engineered as a mobile-first Next.js 14 App Router application with dual SQLite/PostgreSQL) Tj
+T* (support via Prisma ORM, strict TypeScript, Tailwind CSS, Leaflet GIS mapping, Turf.js geospatial analysis,) Tj
+T* (Tesseract OCR, and full Vitest unit testing suites.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 199.8427559055116944 Td
+(•  Frontend & State: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+148.2222047244094654 199.8427559055116944 Td
+(Next.js 14 App Router, React 18, Tailwind CSS, Lucide Icons, Recharts, jsPDF.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 180.0002362204724022 Td
+(•  Pure Engine Layer: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+154.7022047244094836 180.0002362204724022 Td
+(/lib/engine \(carbon.ts, tariff.ts, subsidy.ts, solar.ts, mobility.ts, nudges.ts, credits.ts\).) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 160.1577165354329964 Td
+(•  Geospatial & OCR: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+153.3522047244094608 160.1577165354329964 Td
+(Esri World Imagery, Turf.js spatial geometry, client-side Tesseract.js worker with zero PII) Tj
+T* (retention.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 128.9766141732283131 Td
+(•  State Database: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+140.0322047244094392 128.9766141732283131 Td
+(Prisma ORM with seeded municipal wards across Ahmedabad, Gandhinagar, Surat, and) Tj
+T* (Vadodara.) Tj
+ET
+56.6929133858267775 42.5199212598424126 m
+538.5826771653544256 42.5199212598424126 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+56.6929133858267775 28.3466929133857093 Td
+(HC26-GEDA01 · Mission LiFE Gujarat Project Documentation) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+513.462677165354421 28.3466929133857093 Td
+(Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 6476
+>>
+stream
+0.5670000000000001 w
+0.8 0.84 0.88 RG
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.392 0.455 0.545 rg
+56.6929133858267775 785.1970866141732586 Td
+(GUJARAT ENERGY DEVELOPMENT AGENCY \(GEDA\) · MISSION LiFE GUJARAT) Tj
+ET
+0.89 0.91 0.94 RG
+0.8503937007874016 w
+56.6929133858267775 779.5277952755905062 m
+538.5826771653544256 779.5277952755905062 l
+S
+0.06 0.46 0.43 rg
+56.6929133858267775 762.5199212598424765 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 745.5120472440944468 Td
+(3. Module A: 30-Second Carbon Audit & GERC Tariff Engine) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+492.9026771653544188 745.5120472440944468 Td
+([ Module A ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 728.5041732283464171 Td
+(Module A enables citizens to determine their household baseline footprint in under 30 seconds, comparing their) Tj
+T* (emissions against official Gujarat benchmarks \(Gujarat average: 165 kg CO2/capita/mo; Mission LiFE target: 132) Tj
+T* (kg CO2/capita/mo\).) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 676.0632283464566399 Td
+(Key Technical Capabilities:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 659.0553543307086102 Td
+(•  Auto-Resolving PIN Code: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+184.672204724409454 659.0553543307086102 Td
+(Entering a 6-digit Gujarat PIN code automatically maps the municipal corporation, ward) Tj
+T* (ID, and licensed DISCOM \(Torrent Power, UGVCL, DGVCL, MGVCL, PGVCL\).) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 627.8742519685039269 Td
+(•  Client-Side OCR Bill Scanner: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+199.7022047244094836 627.8742519685039269 Td
+(Users upload PDF or JPG electricity bills. In-browser Tesseract.js OCR parses) Tj
+T* (consumer number, billing cycle kWh, and DISCOM with regex pattern matching.) Tj
+T* (Zero consumer data leaves the browser.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 585.3545669291338527 Td
+(•  GERC Slab-Jump Alert Engine: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+205.6422047244094529 585.3545669291338527 Td
+(Applies official 2024–25 GERC residential slab rates. Detects when a household is) Tj
+T* (within 10% of jumping to a higher slab \(e.g. 100 units or 250 units\) and projects) Tj
+T* (exact rupee savings for shaving load.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 542.8348818897636647 Td
+(•  Multi-Factor Carbon Ledger: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+193.6722047244094256 542.8348818897636647 Td
+(Calculates composite footprint including cooking fuel \(PNG piped gas vs LPG) Tj
+T* (cylinders\) and commute distance.) Tj
+ET
+0.06 0.46 0.43 rg
+56.6929133858267775 500.3151968503936473 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 483.3073228346456176 Td
+(4. Module B: 'Roof-to-Rupee' Solar Polygon Studio) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+492.9026771653544188 483.3073228346456176 Td
+([ Module B ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 466.2994488188975879 Td
+(Module B converts passive interest in rooftop solar into concrete action under the PM Surya Ghar: Muft Bijli Yojana) Tj
+T* (using high-resolution satellite imagery.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 426.614409448818833 Td
+(Key Technical Capabilities:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 409.6065354330708033 Td
+(•  Satellite Polygon Tracing: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+181.5222047244094483 409.6065354330708033 Td
+(Interactive Leaflet map utilizing Esri World Imagery \(0.3m resolution\). Citizens click) Tj
+T* (vertices to trace their rooftop perimeter with real-time area calculation.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 378.4254330708660632 Td
+(•  Turf.js Geometry Engine: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+178.5522047244094495 378.4254330708660632 Td
+(Enforces non-self-intersecting polygons, calculates true geodesics, and applies GEDA's) Tj
+T* (70% usable rooftop solar area heuristic.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 347.24433070866138 Td
+(•  Live Open-Meteo Irradiance: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+193.5822047244095074 347.24433070866138 Td
+(Fetches live Global Horizontal Irradiance \(GHI\) for the exact latitude and longitude,) Tj
+T* (accounting for seasonal sun angles.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 316.0632283464566399 Td
+(•  PM Surya Ghar Subsidy Engine: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+210.052204724409421 316.0632283464566399 Td
+(Computes Central Financial Assistance \(CFA\): Rs. 33,000 for 1 kW, Rs. 66,000) Tj
+T* (for 2 kW, and capped at Rs. 78,000 for systems >= 3 kW.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 284.882125984251843 Td
+(•  25-Year Cash Flow & Break-Even: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+215.632204724409462 284.882125984251843 Td
+(Models 0.5% annual PV degradation, 3% tariff escalation, inverter replacement) Tj
+T* (at Year 10, and generates an interactive Recharts break-even visualization.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 253.7010236220471597 Td
+(•  Empanelled Vendor Directory & Lead Generation: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+283.132204724409462 253.7010236220471597 Td
+(Connects citizens with 12 GEDA-registered solar vendors) Tj
+T* (across Gujarat with direct quotation requests and instant PDF) Tj
+T* (feasibility reports.) Tj
+ET
+56.6929133858267775 42.5199212598424126 m
+538.5826771653544256 42.5199212598424126 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+56.6929133858267775 28.3466929133857093 Td
+(HC26-GEDA01 · Mission LiFE Gujarat Project Documentation) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+513.462677165354421 28.3466929133857093 Td
+(Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 6625
+>>
+stream
+0.8503937007874016 w
+0.89 0.91 0.94 RG
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.392 0.455 0.545 rg
+56.6929133858267775 785.1970866141732586 Td
+(GUJARAT ENERGY DEVELOPMENT AGENCY \(GEDA\) · MISSION LiFE GUJARAT) Tj
+ET
+0.89 0.91 0.94 RG
+0.8503937007874016 w
+56.6929133858267775 779.5277952755905062 m
+538.5826771653544256 779.5277952755905062 l
+S
+0.06 0.46 0.43 rg
+56.6929133858267775 762.5199212598424765 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 745.5120472440944468 Td
+(5. Module C: Live GPS Mobility Tracker & Weather Nudges) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+492.9026771653544188 745.5120472440944468 Td
+([ Module C ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 728.5041732283464171 Td
+(Module C verifies sustainable citizen travel \(walking, cycling, electric bus, metro\) using device GPS telemetry,) Tj
+T* (filtering noisy readings and calculating real-time carbon offsets.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 688.819133858267719 Td
+(Key Technical Capabilities:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 671.8112598425196893 Td
+(•  Live Telemetry & Haversine Smoothing: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+241.5522047244094495 671.8112598425196893 Td
+(Captures continuous GPS coordinates with 3-point rolling median speed) Tj
+T* (filtering to eliminate jitter and GPS multipath drift.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 640.6301574803148924 Td
+(•  Automated Mode Classification: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+209.5122047244094574 640.6301574803148924 Td
+(Classifies travel into WALKING \(<= 7 km/h\), CYCLING \(7–22 km/h\),) Tj
+T* (BUS_TRANSIT \(22–45 km/h\), or TRAIN/METRO \(> 45 km/h\).) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 609.4490551181102092 Td
+(•  Desk-Judging 5x Commute Simulation: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+240.0222047244094483 609.4490551181102092 Td
+(Features deterministic route replay \(Ahmebabad BRTS Janmarg corridor) Tj
+T* (from Vastrapur to RTO\) for seamless judging without requiring outdoor) Tj
+T* (walking.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 566.9293700787401349 Td
+(•  Contextual Weather Nudges: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+194.7522047244094665 566.9293700787401349 Td
+(Listens to Open-Meteo temperature, humidity, and solar conditions. If ambient) Tj
+T* (temperature < 28C, nudges turning off AC; during peak solar \(11 AM–2 PM\), triggers) Tj
+T* (shifting heavy appliance use.) Tj
+ET
+0.06 0.46 0.43 rg
+56.6929133858267775 513.0711023622046696 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 496.0632283464566399 Td
+(6. Module D: State Climate Wallet & Command War-Room) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+492.9026771653544188 496.0632283464566399 Td
+([ Module D ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 479.0553543307086102 Td
+(Module D provides the closing habit loop for citizens and high-altitude administrative control for GEDA state) Tj
+T* (directors.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 439.3703149606298552 Td
+(Citizen Climate Wallet:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 422.3624409448818255 Td
+(•  Append-Only Credit Ledger: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+193.2222047244094938 422.3624409448818255 Td
+(Every audit \(+50\), solar design \(+30\), and verified green commute \(10 credits/kg) Tj
+T* (CO2\) records immutable ledger entries.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 391.1813385826770855 Td
+(•  Daily Habit Streaks & Freezes: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+201.9522047244094836 391.1813385826770855 Td
+(Features 7-day calendar heat-strips, milestone bonus multipliers at 7/30/60 days,) Tj
+T* (and streak freezes for travel.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 360.0002362204724022 Td
+(•  Proof-of-Habit Deduplication: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+198.0822047244094506 360.0002362204724022 Td
+(64-bit dHash perceptual image hashing ensures citizens cannot upload duplicate) Tj
+T* (photos to game credit awards.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 328.8191338582676053 Td
+(•  Seeded Rewards & Official Certificate: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+235.882204724409462 328.8191338582676053 Td
+(Redeem credits for Ahmedabad BRTS transit passes, solar discounts, or) Tj
+T* (download an official GEDA Commendation Certificate PDF.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 297.6380314960629221 Td
+(GEDA State Command War-Room \(/war-room\):) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 280.6301574803148924 Td
+(•  42 Municipal Ward Scorecards: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+205.2822047244094961 280.6301574803148924 Td
+(Real-time composite LiFE rankings across Ahmedabad, Surat, Vadodara, and) Tj
+T* (Gandhinagar.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 249.4490551181102092 Td
+(•  Solar Conversion Funnel: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+182.2422047244093903 249.4490551181102092 Td
+(Tracks pipeline from rooftop polygon drawn -> lead submitted -> empanelled vendor) Tj
+T* (quotation.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 218.2679527559054122 Td
+(•  Statewide Telemetry & CSV Export: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+222.4722047244094654 218.2679527559054122 Td
+(GEDA administrators can filter by city and export clean CSV datasets for) Tj
+T* (policy planning.) Tj
+ET
+56.6929133858267775 42.5199212598424126 m
+538.5826771653544256 42.5199212598424126 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+56.6929133858267775 28.3466929133857093 Td
+(HC26-GEDA01 · Mission LiFE Gujarat Project Documentation) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+513.462677165354421 28.3466929133857093 Td
+(Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 10 0 R
+>>
+endobj
+10 0 obj
+<<
+/Length 7219
+>>
+stream
+0.8503937007874016 w
+0.89 0.91 0.94 RG
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.392 0.455 0.545 rg
+56.6929133858267775 785.1970866141732586 Td
+(GUJARAT ENERGY DEVELOPMENT AGENCY \(GEDA\) · MISSION LiFE GUJARAT) Tj
+ET
+0.89 0.91 0.94 RG
+0.8503937007874016 w
+56.6929133858267775 779.5277952755905062 m
+538.5826771653544256 779.5277952755905062 l
+S
+0.06 0.46 0.43 rg
+56.6929133858267775 762.5199212598424765 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 745.5120472440944468 Td
+(7. Feature Innovation: The EcoVerse Companion) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+492.6626771653544097 745.5120472440944468 Td
+([ EcoVerse ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 728.5041732283464171 Td
+(EcoVerse is the personal sustainability companion proposed in the hackathon concept document. It introduces) Tj
+T* (persona-adapted daily missions, fair community circles, and a dynamic living virtual green world.) Tj
+ET
+BT
+/F2 11 Tf
+12.6499999999999986 TL
+0.118 0.161 0.231 rg
+56.6929133858267775 688.819133858267719 Td
+(Core EcoVerse Innovations:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 671.8112598425196893 Td
+(•  Living Situation Personas: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+186.1122047244094801 671.8112598425196893 Td
+(Tailors missions according to whether the user is a Hostel Student \(device control only\),) Tj
+T* (Rented Apartment Resident \(appliance control\), or Independent Homeowner \(full) Tj
+T* (rooftop & grid control\).) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 629.291574803149615 Td
+(•  EcoTwin Living SVG Island: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+191.7822047244094392 629.291574803149615 Td
+(An animated virtual Gujarat ecosystem that visibly evolves across 5 tiers: Level 1) Tj
+T* (\(Barren Atoll\) -> Level 2 \(Sprouting Haven\) -> Level 3 \(Solar Oasis\) -> Level 4) Tj
+T* (\(Renewable Haven with animated spinning wind turbine & electric BRTS\) -> Level 5) Tj
+T* (\(Utopian Gujarat EcoVerse\). Clickable landmarks reveal real-time impact.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 575.4333070866141497 Td
+(•  Daily EcoQuests with Swap & Skip: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+223.552204724409421 575.4333070866141497 Td
+(3 daily targeted tasks with context rationales. Citizens can complete, skip) Tj
+T* (without penalty, or swap tasks if unsuitable for their day.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 544.2522047244094665 Td
+(•  Community Circles & Invite Codes: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+222.6522047244094722 544.2522047244094665 Td
+(Enables joining groups via codes like IITGN-HOSTEL-4 or) Tj
+T* (VASTRAPUR-GREENS. Employs a fair-play 'Most Improved' track so) Tj
+T* (students and flat residents have equal opportunity to top the leaderboard.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 501.7325196850393354 Td
+(•  Tangible Impact Storytelling: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+194.5722047244093744 501.7325196850393354 Td
+(Translates abstract emissions into understandable metrics: Neem trees planted,) Tj
+T* (educational classroom ceiling fan hours powered, and thermal coal displaced.) Tj
+ET
+0.06 0.46 0.43 rg
+56.6929133858267775 459.2128346456692043 8.5039370078740166 -22.677165354330711 re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.059 0.09 0.165 rg
+73.7007874015748143 442.2049606299212314 Td
+(8. Verification & Quality Benchmarks) Tj
+ET
+BT
+/F2 8 Tf
+9.1999999999999993 TL
+0.051 0.58 0.533 rg
+489.3026771653543392 442.2049606299212314 Td
+([ Audit Trail ]) Tj
+ET
+BT
+/F1 9.5 Tf
+10.9249999999999989 TL
+0.2 0.255 0.333 rg
+56.6929133858267775 425.1970866141731449 Td
+(The application adheres to the highest engineering standards as validated by automated test runners:) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 398.2679527559054691 Td
+(•  TypeScript Strict Mode: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+172.7022047244094551 398.2679527559054691 Td
+(100% type safety with zero 'any' escapes in core calculation libraries. Ran 'tsc --noEmit') Tj
+T* (with 0 errors.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 367.086850393700729 Td
+(•  Unit Test Coverage: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+156.7722047244094483 367.086850393700729 Td
+(Vitest suite covering carbon, tariffs, solar cash flow, mobility smoothing, and credit ledgers.) Tj
+T* (48/48 tests passing \(100% pass rate\).) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 335.9057480314959889 Td
+(•  Next.js Production Build: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+180.2622047244094006 335.9057480314959889 Td
+(All 28 static and dynamic routes pre-rendered and verified via 'next build'.) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+62.3622047244094517 316.0632283464566399 Td
+(•  Offline & Demo Robustness: ) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.2 0.255 0.333 rg
+194.6622047244094347 316.0632283464566399 Td
+(Every API features graceful fallbacks with visible badges; includes synthetic) Tj
+T* (commute traces and pre-packaged DISCOM bills for offline hackathon) Tj
+T* (demonstration.) Tj
+ET
+0.95 0.96 0.98 rg
+0.8 0.84 0.88 RG
+62.3622047244094517 245.1970866141731449 m
+532.9133858267716732 245.1970866141731449 l
+536.0444489754187316 245.1970866141731449 538.5826771653544256 242.6588584242374509 538.5826771653544256 239.5277952755904494 c
+538.5826771653544256 182.8348818897636932 l
+538.5826771653544256 179.7038187411166916 535.4516140167073672 177.1655905511809976 532.9133858267716732 177.1655905511809976 c
+62.3622047244094517 177.1655905511809976 l
+59.231141575762436 177.1655905511809976 56.6929133858267775 180.2966536998279992 56.6929133858267775 182.8348818897636932 c
+56.6929133858267775 239.5277952755904494 l
+56.6929133858267775 242.6588584242374509 59.8239765344737933 245.1970866141731449 62.3622047244094517 245.1970866141731449 c
+h
+B
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.059 0.463 0.431 rg
+70.8661417322834666 228.1892125984251152 Td
+(DELIVERED FOR GUJARAT ENERGY DEVELOPMENT AGENCY \(GEDA\)) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.278 0.333 0.412 rg
+70.8661417322834666 211.1813385826770855 Td
+(Submitted for Hackathon Evaluation · Problem Statement: HC26-GEDA01 · Mission LiFE Gujarat) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.278 0.333 0.412 rg
+70.8661417322834666 194.1734645669290558 Td
+(Generated on: Monday, 2 November 2026 · All Systems Operational) Tj
+ET
+56.6929133858267775 42.5199212598424126 m
+538.5826771653544256 42.5199212598424126 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+56.6929133858267775 28.3466929133857093 Td
+(HC26-GEDA01 · Mission LiFE Gujarat Project Documentation) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.58 0.639 0.722 rg
+513.462677165354421 28.3466929133857093 Td
+(Page 4) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R 7 0 R 9 0 R ]
+/Count 4
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+19 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+20 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+21 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+22 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+23 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+24 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 11 0 R
+/F2 12 0 R
+/F3 13 0 R
+/F4 14 0 R
+/F5 15 0 R
+/F6 16 0 R
+/F7 17 0 R
+/F8 18 0 R
+/F9 19 0 R
+/F10 20 0 R
+/F11 21 0 R
+/F12 22 0 R
+/F13 23 0 R
+/F14 24 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+25 0 obj
+<<
+/Producer (jsPDF 2.5.2)
+/CreationDate (D:20261102192819+05'30')
+>>
+endobj
+26 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 27
+0000000000 65535 f 
+0000028144 00000 n 
+0000029984 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000007255 00000 n 
+0000007392 00000 n 
+0000013920 00000 n 
+0000014057 00000 n 
+0000020734 00000 n 
+0000020872 00000 n 
+0000028219 00000 n 
+0000028345 00000 n 
+0000028476 00000 n 
+0000028610 00000 n 
+0000028748 00000 n 
+0000028872 00000 n 
+0000029001 00000 n 
+0000029133 00000 n 
+0000029269 00000 n 
+0000029397 00000 n 
+0000029524 00000 n 
+0000029653 00000 n 
+0000029786 00000 n 
+0000029888 00000 n 
+0000030237 00000 n 
+0000030323 00000 n 
+trailer
+<<
+/Size 27
+/Root 26 0 R
+/Info 25 0 R
+/ID [ <3ADED64CA63959DFEDA8D29DE5435C2F> <3ADED64CA63959DFEDA8D29DE5435C2F> ]
+>>
+startxref
+30427
+%%EOF

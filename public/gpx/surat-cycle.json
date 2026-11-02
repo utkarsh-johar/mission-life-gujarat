@@ -1,0 +1,9 @@
+[
+  { "lat": 21.1715, "lng": 72.7958, "t": 0, "speed": 11.2, "mode": "CYCLE" },
+  { "lat": 21.1750, "lng": 72.7940, "t": 4, "speed": 14.5, "mode": "CYCLE" },
+  { "lat": 21.1810, "lng": 72.7925, "t": 8, "speed": 15.8, "mode": "CYCLE" },
+  { "lat": 21.1895, "lng": 72.7890, "t": 12, "speed": 16.2, "mode": "CYCLE" },
+  { "lat": 21.1940, "lng": 72.7840, "t": 16, "speed": 13.5, "mode": "CYCLE" },
+  { "lat": 21.1982, "lng": 72.7780, "t": 20, "speed": 14.8, "mode": "CYCLE" },
+  { "lat": 21.2020, "lng": 72.7720, "t": 24, "speed": 12.0, "mode": "CYCLE" }
+]

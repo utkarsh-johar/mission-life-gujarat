@@ -1,0 +1,8 @@
+[
+  { "lat": 23.2167, "lng": 72.6500, "t": 0, "speed": 4.5, "mode": "WALK" },
+  { "lat": 23.2185, "lng": 72.6515, "t": 5, "speed": 4.8, "mode": "WALK" },
+  { "lat": 23.2205, "lng": 72.6530, "t": 10, "speed": 5.1, "mode": "WALK" },
+  { "lat": 23.2220, "lng": 72.6550, "t": 15, "speed": 4.6, "mode": "WALK" },
+  { "lat": 23.2235, "lng": 72.6570, "t": 20, "speed": 4.9, "mode": "WALK" },
+  { "lat": 23.2250, "lng": 72.6590, "t": 25, "speed": 4.4, "mode": "WALK" }
+]
