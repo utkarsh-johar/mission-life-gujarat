@@ -88,13 +88,18 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       kpis: {
         totalCitizens: 1240,
+        weeklyActiveCitizens: 580,
+        totalTonnesCo2: 142.5,
+        totalKwhShifted: 18450,
+        totalGreenKm: 48920,
         totalAudits: 890,
         totalTrips: 3420,
         totalRoofs: 310,
-        totalLeads: 145,
-        totalTonnesCo2: 142.5,
+        totalRoofsDrawn: 310,
         totalPotentialKw: 1850,
         totalSubsidyCr: 4.07,
+        totalLeads: 145,
+        estimatedBillSavingsInr: 1068750,
       },
       commuteDistribution: [
         { mode: "Walking & Cycling", percentage: 38, kgSaved: 60000 },
