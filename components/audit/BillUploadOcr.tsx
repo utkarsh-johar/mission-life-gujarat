@@ -56,19 +56,28 @@ export const BillUploadOcr: React.FC<BillUploadOcrProps> = ({ onBillConfirmed })
 
       const parsed = parseBillOcrText(ret.data.text);
       setExtractedData(parsed);
-      setEditableKwh(parsed.monthlyKwh > 0 ? parsed.monthlyKwh.toString() : "210");
+      if (parsed.monthlyKwh > 0) {
+        setEditableKwh(parsed.monthlyKwh.toString());
+      } else {
+        // When scan is low-contrast or numbers in table are blurred, leave empty with guided alert
+        setEditableKwh("");
+        setErrorMsg(
+          `DISCOM recognized as ${parsed.discom}, but table reading was blurred in photo. Please enter your monthly units (e.g. 123 kWh) in the box below.`
+        );
+      }
       setEditableDiscom(parsed.discom);
     } catch (err) {
       console.warn("Client OCR failed or worker error, providing guided fallback:", err);
       // Graceful fallback to guided input
       setExtractedData({
-        kwh: 214,
+        kwh: 0,
         days: 30,
-        monthlyKwh: 214,
+        monthlyKwh: 0,
         discom: "UGVCL",
-        confidence: 0.5,
+        confidence: 0.4,
       });
-      setEditableKwh("214");
+      setEditableKwh("");
+      setErrorMsg("Could not scan bill automatically. Please enter your monthly units manually below.");
     } finally {
       setIsProcessing(false);
     }
@@ -186,6 +195,7 @@ export const BillUploadOcr: React.FC<BillUploadOcrProps> = ({ onBillConfirmed })
               <input
                 type="number"
                 value={editableKwh}
+                placeholder="e.g. 123"
                 onChange={(e) => setEditableKwh(e.target.value)}
                 className="w-full px-3 py-1.5 text-sm font-bold bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-1 focus:ring-tealbrand-500"
               />
