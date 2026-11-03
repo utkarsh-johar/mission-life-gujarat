@@ -22,8 +22,10 @@ import {
   classifyMobilityMode,
   calculateTripCo2Saved,
   ClassifiedMode,
+  roundTwo,
 } from "../../lib/engine/mobility";
 import { CommuteMode } from "../../config/emission";
+import { AHMEDABAD_BRTS_SIMULATION_ROUTE } from "../../config/simulationRoute";
 import dynamic from "next/dynamic";
 
 // Dynamic Leaflet mini-map for trip trace
@@ -70,58 +72,68 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
   // Refs for tracking timers and positions
   const watchIdRef = useRef<number | null>(null);
   const simIndexRef = useRef<number>(0);
-  const simRouteRef = useRef<any[]>([]);
-  const intervalTimerRef = useRef<any>(null);
+  const movingTimerRef = useRef<any>(null);
+  const simTimerRef = useRef<any>(null);
+  const lastFixRef = useRef<[number, number] | null>(null);
+  const totalDistanceRef = useRef<number>(0);
   const tripStartTimeRef = useRef<Date>(new Date());
-
-  // Load sample GPX simulation route
-  useEffect(() => {
-    fetch("/gpx/ahmedabad-commute.json")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          simRouteRef.current = data;
-        }
-      })
-      .catch((err) => console.warn("Failed to load GPX route:", err));
-  }, []);
 
   // Timer tick for movingSeconds
   useEffect(() => {
     if (trackingState === "RECORDING") {
-      intervalTimerRef.current = setInterval(() => {
+      movingTimerRef.current = setInterval(() => {
         setMovingSeconds((prev) => prev + 1);
       }, 1000);
     } else {
-      if (intervalTimerRef.current) clearInterval(intervalTimerRef.current);
+      if (movingTimerRef.current) {
+        clearInterval(movingTimerRef.current);
+        movingTimerRef.current = null;
+      }
     }
     return () => {
-      if (intervalTimerRef.current) clearInterval(intervalTimerRef.current);
+      if (movingTimerRef.current) {
+        clearInterval(movingTimerRef.current);
+        movingTimerRef.current = null;
+      }
     };
   }, [trackingState]);
 
+  // Clean up all timers on unmount
+  useEffect(() => {
+    return () => {
+      if (simTimerRef.current) clearInterval(simTimerRef.current);
+      if (movingTimerRef.current) clearInterval(movingTimerRef.current);
+      if (watchIdRef.current !== null && typeof navigator !== "undefined" && navigator.geolocation) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
+      }
+    };
+  }, []);
+
   // Handle incoming GPS / simulated point
   const handleNewFix = (lat: number, lng: number, speedKmh: number) => {
-    setTracePoints((prev) => {
-      if (prev.length > 0) {
-        const last = prev[prev.length - 1];
-        const distMeters = haversineDistanceMeters(last[0], last[1], lat, lng);
-        if (distMeters >= 3) {
-          const addedKm = distMeters / 1000;
-          setDistanceKm((currDist) => {
-            const nextDist = Math.round((currDist + addedKm) * 1000) / 1000;
-            // Odometer CO2 saved calculation
-            const saved = calculateTripCo2Saved(nextDist, "CYCLE", "CAR_PETROL");
-            setCo2SavedKg(saved);
-            return nextDist;
-          });
-        }
-      }
-      return [...prev, [lat, lng]];
-    });
+    if (lastFixRef.current) {
+      const [lastLat, lastLng] = lastFixRef.current;
+      const distMeters = haversineDistanceMeters(lastLat, lastLng, lat, lng);
+      // Only accumulate if realistic movement >= 1m
+      if (distMeters >= 1) {
+        totalDistanceRef.current += distMeters / 1000;
+        const currentTotalKm = roundTwo(totalDistanceRef.current);
+        setDistanceKm(currentTotalKm);
 
-    setCurrentSpeedKmh(speedKmh);
-    setMaxSpeedKmh((prev) => Math.max(prev, speedKmh));
+        // Odometer CO2 saved calculation vs petrol car baseline (0.192 kg CO2 / km)
+        const saved = calculateTripCo2Saved(
+          currentTotalKm,
+          speedKmh > 18 ? "BUS" : "CYCLE",
+          "CAR_PETROL"
+        );
+        setCo2SavedKg(roundTwo(saved));
+      }
+    }
+    lastFixRef.current = [lat, lng];
+
+    setTracePoints((prev) => [...prev, [lat, lng]]);
+    setCurrentSpeedKmh(Math.round(speedKmh * 10) / 10);
+    setMaxSpeedKmh((prev) => Math.max(prev, Math.round(speedKmh * 10) / 10));
 
     if (speedKmh <= 1.0) {
       setStopsCount((prev) => prev + 1);
@@ -130,7 +142,7 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
     setSpeedsRecorded((prev) => {
       const updated = [...prev, speedKmh];
       // Run mode classification on rolling speed window
-      const result = classifyMobilityMode(updated, stopsCount, distanceKm);
+      const result = classifyMobilityMode(updated, stopsCount, totalDistanceRef.current);
       setClassifiedMode(result.mode);
       setClassificationReason(result.reason);
       setRequiresConfirmation(result.requiresUserConfirmation);
@@ -140,31 +152,58 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
 
   // Start Tracker
   const handleStart = () => {
+    // If starting fresh from IDLE or STOPPED, reset telemetry
+    if (trackingState === "IDLE" || trackingState === "STOPPED") {
+      lastFixRef.current = null;
+      totalDistanceRef.current = 0;
+      setDistanceKm(0);
+      setMovingSeconds(0);
+      setCurrentSpeedKmh(0);
+      setMaxSpeedKmh(0);
+      setCo2SavedKg(0);
+      setTracePoints([]);
+      setSpeedsRecorded([]);
+      setStopsCount(0);
+      simIndexRef.current = 0;
+      tripStartTimeRef.current = new Date();
+    }
+
     setTrackingState("RECORDING");
-    tripStartTimeRef.current = new Date();
 
     if (isSimulated) {
-      // Run Simulated Route Replay
-      simIndexRef.current = 0;
-      const route = simRouteRef.current;
-      if (!route || route.length === 0) return;
+      if (simTimerRef.current) {
+        clearInterval(simTimerRef.current);
+        simTimerRef.current = null;
+      }
 
-      const simInterval = setInterval(() => {
+      const route = AHMEDABAD_BRTS_SIMULATION_ROUTE;
+      if (simIndexRef.current >= route.length) {
+        simIndexRef.current = 0;
+      }
+
+      // Immediately feed the first fix on click so gauge and counters wake up instantly
+      const firstFix = route[simIndexRef.current];
+      if (firstFix) {
+        handleNewFix(firstFix.lat, firstFix.lng, firstFix.speed);
+        simIndexRef.current++;
+      }
+
+      // Replay subsequent points every 800ms
+      simTimerRef.current = setInterval(() => {
         if (simIndexRef.current >= route.length) {
-          clearInterval(simInterval);
-          handleStop();
-          return;
+          // Loop smoothly so the simulation doesn't stall
+          simIndexRef.current = 0;
         }
 
         const point = route[simIndexRef.current];
-        handleNewFix(point.lat, point.lng, point.speed || 0);
+        if (point) {
+          handleNewFix(point.lat, point.lng, point.speed);
+        }
         simIndexRef.current++;
-      }, 1000); // 1s per point in simulation mode (AC-C1)
-
-      intervalTimerRef.current = simInterval;
+      }, 800);
     } else {
       // Real Geolocation Watch
-      if (navigator.geolocation) {
+      if (typeof navigator !== "undefined" && navigator.geolocation) {
         watchIdRef.current = navigator.geolocation.watchPosition(
           (pos) => {
             const { latitude, longitude, speed } = pos.coords;
@@ -180,17 +219,25 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
 
   const handlePause = () => {
     setTrackingState("PAUSED");
-    if (intervalTimerRef.current) clearInterval(intervalTimerRef.current);
-    if (watchIdRef.current && navigator.geolocation) {
+    if (simTimerRef.current) {
+      clearInterval(simTimerRef.current);
+      simTimerRef.current = null;
+    }
+    if (watchIdRef.current !== null && typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.clearWatch(watchIdRef.current);
+      watchIdRef.current = null;
     }
   };
 
   const handleStop = () => {
     setTrackingState("STOPPED");
-    if (intervalTimerRef.current) clearInterval(intervalTimerRef.current);
-    if (watchIdRef.current && navigator.geolocation) {
+    if (simTimerRef.current) {
+      clearInterval(simTimerRef.current);
+      simTimerRef.current = null;
+    }
+    if (watchIdRef.current !== null && typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.clearWatch(watchIdRef.current);
+      watchIdRef.current = null;
     }
 
     // If speed profile indicates transit/vehicle, show confirmation modal (AC-C2 / 7.2)
@@ -417,6 +464,16 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
               <Square className="w-4 h-4" /> Stop & Save
             </button>
           </>
+        )}
+
+        {trackingState === "STOPPED" && (
+          <button
+            type="button"
+            onClick={handleStart}
+            className="px-8 py-3 bg-tealbrand-600 hover:bg-tealbrand-700 text-white font-bold text-sm rounded-2xl shadow-md transition-all flex items-center gap-2"
+          >
+            <Play className="w-4 h-4" /> Start New Trip
+          </button>
         )}
       </div>
 
