@@ -463,8 +463,8 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
         )}
       </div>
 
-      {/* Map Control Buttons (Locate, Street Overlay, Sample 100m²) */}
-      <div className="absolute top-14 right-3 z-10 flex flex-col gap-2">
+      {/* Map Control Buttons (Locate, Street Overlay, Coordinates) */}
+      <div className="absolute top-[92px] right-3 z-10 flex flex-col gap-2">
         <button
           type="button"
           onClick={handleLocateMe}
