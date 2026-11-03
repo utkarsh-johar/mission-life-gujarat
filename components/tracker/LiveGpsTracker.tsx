@@ -110,25 +110,47 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
   }, []);
 
   // Handle incoming GPS / simulated point
-  const handleNewFix = (lat: number, lng: number, speedKmh: number) => {
-    if (lastFixRef.current) {
-      const [lastLat, lastLng] = lastFixRef.current;
-      const distMeters = haversineDistanceMeters(lastLat, lastLng, lat, lng);
-      // Only accumulate if realistic movement >= 1m
-      if (distMeters >= 1) {
-        totalDistanceRef.current += distMeters / 1000;
-        const currentTotalKm = roundTwo(totalDistanceRef.current);
-        setDistanceKm(currentTotalKm);
+  const handleNewFix = (lat: number, lng: number, speedKmh: number, isTeleport = false) => {
+    if (isTeleport) {
+      lastFixRef.current = [lat, lng];
+      return;
+    }
 
-        // Odometer CO2 saved calculation vs petrol car baseline (0.192 kg CO2 / km)
-        const saved = calculateTripCo2Saved(
-          currentTotalKm,
-          speedKmh > 18 ? "BUS" : "CYCLE",
-          "CAR_PETROL"
-        );
-        setCo2SavedKg(roundTwo(saved));
+    let addedKm = 0;
+    if (isSimulated) {
+      // In 5x simulation mode: physically consistent odometer (v * dt)
+      // 0.8s tick * 5x speed = 4s real-time step
+      const dtSeconds = 0.8 * 5; // 4 seconds simulated
+      const addedMeters = (speedKmh / 3.6) * dtSeconds;
+      if (addedMeters > 0) {
+        addedKm = addedMeters / 1000;
+      }
+    } else {
+      // Real Geolocation mode: Filtered Haversine delta
+      if (lastFixRef.current) {
+        const [lastLat, lastLng] = lastFixRef.current;
+        const distMeters = haversineDistanceMeters(lastLat, lastLng, lat, lng);
+        // Only count if between 1m and 60m per second (guards against GPS glitches and teleportation)
+        if (distMeters >= 1 && distMeters <= 60) {
+          addedKm = distMeters / 1000;
+        }
       }
     }
+
+    if (addedKm > 0) {
+      totalDistanceRef.current += addedKm;
+      const currentTotalKm = roundTwo(totalDistanceRef.current);
+      setDistanceKm(currentTotalKm);
+
+      // Odometer CO2 saved calculation vs petrol car baseline (0.192 kg CO2 / km)
+      const saved = calculateTripCo2Saved(
+        currentTotalKm,
+        speedKmh > 18 ? "BUS" : "CYCLE",
+        "CAR_PETROL"
+      );
+      setCo2SavedKg(roundTwo(saved));
+    }
+
     lastFixRef.current = [lat, lng];
 
     setTracePoints((prev) => [...prev, [lat, lng]]);
@@ -191,8 +213,9 @@ export const LiveGpsTracker: React.FC<LiveGpsTrackerProps> = ({ onTripCompleted 
       // Replay subsequent points every 800ms
       simTimerRef.current = setInterval(() => {
         if (simIndexRef.current >= route.length) {
-          // Loop smoothly so the simulation doesn't stall
+          // Loop smoothly: reset index and clear last fix so no wrap-around teleport distance is counted
           simIndexRef.current = 0;
+          lastFixRef.current = null;
         }
 
         const point = route[simIndexRef.current];
