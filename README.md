@@ -1,7 +1,6 @@
 # 🌿 LiFE Gujarat — Mission LiFE Citizen Engagement & Rooftop Solar Platform
 
 [![Live App](https://img.shields.io/badge/Live%20App-mission--life--gujarat.vercel.app-0d9488?style=for-the-badge&logo=vercel)](https://mission-life-gujarat.vercel.app)
-[![Project Report](https://img.shields.io/badge/Project%20Report-Download%20PDF-f59e0b?style=for-the-badge&logo=adobeacrobatreader)](https://mission-life-gujarat.vercel.app/Mission-LiFE-Gujarat-Project-Report.pdf)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/utkarsh-johar/mission-life-gujarat)
 [![Tests Passing](https://img.shields.io/badge/Tests-49%2F49%20Passing-10b981?style=for-the-badge&logo=vitest)](https://github.com/utkarsh-johar/mission-life-gujarat)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.2%20App%20Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -15,10 +14,8 @@
 
 ## 🔗 Quick Links
 
-- 🌐 **Production Deployment:** [https://mission-life-gujarat.vercel.app](https://mission-life-gujarat.vercel.app)
-- 📄 **10-Slide Pitch Deck & Architecture Report (PDF):** [https://mission-life-gujarat.vercel.app/Mission-LiFE-Gujarat-Project-Report.pdf](https://mission-life-gujarat.vercel.app/Mission-LiFE-Gujarat-Project-Report.pdf)
+- 🌐 **Production Deployment (Vercel):** [https://mission-life-gujarat.vercel.app](https://mission-life-gujarat.vercel.app)
 - 💻 **GitHub Codebase:** [https://github.com/utkarsh-johar/mission-life-gujarat](https://github.com/utkarsh-johar/mission-life-gujarat)
-- 🏠 **Local Dev Server:** `http://localhost:3000`
 
 ---
 
@@ -168,8 +165,7 @@ npm test
 npm run dev
 ```
 
-Open your browser and navigate to:  
-👉 **`http://localhost:3000`**
+Open your browser and navigate to the local development port.
 
 ---
 
@@ -204,5 +200,4 @@ npm test
 - **Organisation:** Gujarat Energy Development Agency (GEDA)
 - **Evaluation Partner:** NxtWave
 - **Live Vercel Application:** [https://mission-life-gujarat.vercel.app](https://mission-life-gujarat.vercel.app)
-- **PDF Project Report:** [https://mission-life-gujarat.vercel.app/Mission-LiFE-Gujarat-Project-Report.pdf](https://mission-life-gujarat.vercel.app/Mission-LiFE-Gujarat-Project-Report.pdf)
 - **Repository License:** MIT Open Source
