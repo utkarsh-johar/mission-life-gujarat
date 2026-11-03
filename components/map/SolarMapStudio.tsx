@@ -13,6 +13,7 @@ import {
   Search,
   Loader2,
   FileText,
+  Sparkles,
 } from "lucide-react";
 
 interface SolarMapStudioProps {
@@ -159,29 +160,25 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
       if (vertices.length >= 3) {
         const latLngs = vertices.map(([lat, lng]) => [lat, lng]);
 
-        if (polygonLayerRef.current) {
-          polygonLayerRef.current.setLatLngs(latLngs);
-        } else {
-          const poly = L.polygon(latLngs as any, {
-            color: "#0d9488",
-            fillColor: "#14b8a6",
-            fillOpacity: 0.45,
-            weight: 2.5,
-          }).addTo(mapInstanceRef.current);
-          polygonLayerRef.current = poly;
-        }
-
         // Turf Area & Kinks validation
         const turfCoords = vertices.map(([lat, lng]) => [lng, lat]);
         turfCoords.push(turfCoords[0]); // close polygon loop
 
+        let hasKinks = false;
         try {
           const turfPoly = turf.polygon([turfCoords]);
           const kinks = turf.kinks(turfPoly);
 
           if (kinks.features.length > 0) {
-            setKinksWarning("Self-intersecting polygon! Uncross perimeter lines to get accurate area.");
-            setLiveAreaSqM(0);
+            hasKinks = true;
+            setKinksWarning("Overlapping polygon edges! Click 'Auto-Fix Overlap' to untangle.");
+            try {
+              const unkinked = turf.unkinkPolygon(turfPoly);
+              const totalArea = unkinked.features.reduce((sum, f) => sum + turf.area(f), 0);
+              setLiveAreaSqM(Math.round(totalArea * 10) / 10);
+            } catch {
+              setLiveAreaSqM(0);
+            }
           } else {
             setKinksWarning(null);
             const area = Math.round(turf.area(turfPoly) * 10) / 10;
@@ -189,6 +186,30 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
           }
         } catch (e) {
           // ignore transient geometry
+        }
+
+        const polyStyle = hasKinks
+          ? {
+              color: "#f59e0b",
+              fillColor: "#fbbf24",
+              fillOpacity: 0.35,
+              weight: 2.5,
+              dashArray: "6, 6",
+            }
+          : {
+              color: "#0d9488",
+              fillColor: "#14b8a6",
+              fillOpacity: 0.45,
+              weight: 2.5,
+              dashArray: undefined,
+            };
+
+        if (polygonLayerRef.current) {
+          polygonLayerRef.current.setLatLngs(latLngs);
+          polygonLayerRef.current.setStyle(polyStyle);
+        } else {
+          const poly = L.polygon(latLngs as any, polyStyle).addTo(mapInstanceRef.current);
+          polygonLayerRef.current = poly;
         }
       } else {
         if (polygonLayerRef.current) {
@@ -264,28 +285,84 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
     setSearchQuery(item.displayName.split(",")[0]);
   };
 
+  // Auto-untangle overlapping edges
+  const handleAutoFixOverlap = () => {
+    if (vertices.length < 3) return;
+    try {
+      const centerLat = vertices.reduce((sum, v) => sum + v[0], 0) / vertices.length;
+      const centerLng = vertices.reduce((sum, v) => sum + v[1], 0) / vertices.length;
+
+      // Sort points radially around centroid
+      const sorted = [...vertices].sort((a, b) => {
+        const angleA = Math.atan2(a[0] - centerLat, a[1] - centerLng);
+        const angleB = Math.atan2(b[0] - centerLat, b[1] - centerLng);
+        return angleA - angleB;
+      });
+
+      const turfCoords = sorted.map(([lat, lng]) => [lng, lat]);
+      turfCoords.push(turfCoords[0]);
+      const testPoly = turf.polygon([turfCoords]);
+      const kinks = turf.kinks(testPoly);
+
+      if (kinks.features.length === 0) {
+        setVertices(sorted);
+        setKinksWarning(null);
+        return;
+      }
+
+      // Convex hull fallback if simple angular sort still crossed
+      const points = turf.featureCollection(
+        vertices.map(([lat, lng]) => turf.point([lng, lat]))
+      );
+      const hull = turf.convex(points);
+      if (hull && hull.geometry && hull.geometry.coordinates[0]) {
+        const ring = hull.geometry.coordinates[0];
+        const newVertices: [number, number][] = ring.slice(0, -1).map(([lng, lat]) => [lat, lng]);
+        setVertices(newVertices);
+        setKinksWarning(null);
+      }
+    } catch (e) {
+      console.warn("Auto-fix overlap error:", e);
+    }
+  };
+
   // Finish Drawing Polygon
   const handleCompletePolygon = () => {
     if (vertices.length < 3) {
       alert("Please click at least 3 points on your rooftop.");
       return;
     }
+
+    let finalVertices = [...vertices];
+
+    // If edges cross, untangle automatically
     if (kinksWarning) {
-      alert(kinksWarning);
-      return;
+      const centerLat = finalVertices.reduce((sum, v) => sum + v[0], 0) / finalVertices.length;
+      const centerLng = finalVertices.reduce((sum, v) => sum + v[1], 0) / finalVertices.length;
+      const sorted = [...finalVertices].sort((a, b) => {
+        const angleA = Math.atan2(a[0] - centerLat, a[1] - centerLng);
+        const angleB = Math.atan2(b[0] - centerLat, b[1] - centerLng);
+        return angleA - angleB;
+      });
+      finalVertices = sorted;
+      setVertices(sorted);
+      setKinksWarning(null);
     }
-    if (liveAreaSqM < 10) {
+
+    const turfCoords = finalVertices.map(([lat, lng]) => [lng, lat]);
+    turfCoords.push(turfCoords[0]);
+    const geoJsonPolygon = turf.polygon([turfCoords]);
+    const area = Math.round(turf.area(geoJsonPolygon) * 10) / 10;
+
+    if (area < 10) {
       alert("Rooftop area is under 10 m². Please draw a larger perimeter.");
       return;
     }
 
-    const turfCoords = vertices.map(([lat, lng]) => [lng, lat]);
-    turfCoords.push(turfCoords[0]);
-    const geoJsonPolygon = turf.polygon([turfCoords]);
     const centroidFeature = turf.centroid(geoJsonPolygon);
     const [centroidLng, centroidLat] = centroidFeature.geometry.coordinates;
 
-    onPolygonComplete(geoJsonPolygon.geometry, liveAreaSqM, [centroidLat, centroidLng]);
+    onPolygonComplete(geoJsonPolygon.geometry, area, [centroidLat, centroidLng]);
   };
 
   const handleUndo = () => {
@@ -460,18 +537,28 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
         </div>
       )}
 
-      {/* Self-Intersection Warning Banner */}
+      {/* Self-Intersection Warning Banner (Positioned safely above bottom toolbar) */}
       {kinksWarning && (
-        <div className="absolute bottom-20 left-3 right-3 z-10 p-2.5 rounded-xl bg-rose-600 text-white text-xs font-semibold shadow-lg flex items-center gap-2 animate-bounce">
-          <AlertTriangle className="w-4 h-4 shrink-0" />
-          <span>{kinksWarning}</span>
+        <div className="absolute bottom-[92px] left-3 right-3 z-20 p-2.5 rounded-xl bg-amber-600/95 text-white text-xs font-semibold shadow-xl flex items-center justify-between gap-2 backdrop-blur-xs">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <AlertTriangle className="w-4 h-4 shrink-0 text-amber-200" />
+            <span className="truncate">{kinksWarning}</span>
+          </div>
+          <button
+            type="button"
+            onClick={handleAutoFixOverlap}
+            className="px-3 py-1 bg-white text-amber-900 hover:bg-amber-50 rounded-lg text-xs font-bold shrink-0 shadow-xs transition-colors flex items-center gap-1"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>Auto-Fix Overlap</span>
+          </button>
         </div>
       )}
 
-      {/* Bottom Live Area Badge & Drawing Controls */}
-      <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 p-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
-        <div className="flex items-center gap-3">
-          <div className="px-3 py-1 rounded-xl bg-tealbrand-50 dark:bg-tealbrand-950/50 border border-tealbrand-200 dark:border-tealbrand-800">
+      {/* Bottom Live Area Badge & Drawing Controls (Clean Non-Overlapping Layout) */}
+      <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-2.5 sm:p-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+        <div className="flex items-center gap-2.5">
+          <div className="px-3 py-1 rounded-xl bg-tealbrand-50 dark:bg-tealbrand-950/50 border border-tealbrand-200 dark:border-tealbrand-800 shrink-0">
             <div className="text-[10px] text-tealbrand-700 dark:text-teal-400 uppercase font-bold tracking-wider">
               Roof Area
             </div>
@@ -486,12 +573,12 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
             </div>
           </div>
 
-          <div className="text-[11px] text-slate-500 hidden sm:block">
+          <div className="text-[11px] text-slate-500 hidden md:block">
             {vertices.length} vertices added
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap sm:flex-nowrap justify-end">
           {/* 100 m² Sample button (Golden Case AC-B1) */}
           <button
             type="button"
@@ -526,7 +613,7 @@ export const SolarMapStudio: React.FC<SolarMapStudioProps> = ({
           <button
             type="button"
             onClick={handleCompletePolygon}
-            disabled={vertices.length < 3 || Boolean(kinksWarning)}
+            disabled={vertices.length < 3}
             className="px-4 py-2 bg-tealbrand-600 hover:bg-tealbrand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
           >
             <CheckCircle2 className="w-4 h-4" />
