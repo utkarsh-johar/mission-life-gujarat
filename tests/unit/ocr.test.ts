@@ -36,6 +36,26 @@ describe("OCR Bill Parser Tests", () => {
     expect(parsed.monthlyKwh).toBe(200); // 400 * 30 / 60
   });
 
+  it("Parses Gujarat UGVCL Naroda bi-monthly bill format (Difference 246)", () => {
+    const ugvclBillText = `
+      Uttar Gujarat Vij Company Limited
+      UGVCL
+      E-ELECTRICITY BILL : OCT-NOV,24
+      Consumer No: 75103143097
+      Readings KWH
+      Present 2870
+      Past 2624
+      Difference 246
+      Total (1 to 9): 1813.55
+    `;
+    const parsed = parseBillOcrText(ugvclBillText);
+    expect(parsed.discom).toBe("UGVCL");
+    expect(parsed.kwh).toBe(246);
+    expect(parsed.days).toBe(60); // OCT-NOV bi-monthly
+    expect(parsed.monthlyKwh).toBe(123); // 246 / 2
+    expect(parsed.confidence).toBeGreaterThanOrEqual(0.8);
+  });
+
   it("Masks consumer numbers correctly", () => {
     expect(maskConsumerNumber("123456789012")).toBe("XXXX-XXXX-9012");
     expect(maskConsumerNumber("1234")).toBe("1234");

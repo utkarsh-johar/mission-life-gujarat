@@ -44,6 +44,7 @@ export function parseBillOcrText(text: string): ParsedBillData {
   let rawSnippet = "";
 
   const unitsPatterns = [
+    /(?:Difference|તફાવત)\s*[:=-]?\s*(\d+(?:\.\d+)?)/i,
     /(?:Units\s*Consumed|Consumption|Total\s*Units|Billed\s*Units|વપરાશ|કુલ\s*યુનિટ)\s*[:=-]?\s*(\d+(?:\.\d+)?)/i,
     /(?:kWh|Units)\s*[:=-]?\s*(\d+(?:\.\d+)?)/i,
     /(\d+(?:\.\d+)?)\s*(?:kWh|Units|યુનિટ)/i,
@@ -55,9 +56,24 @@ export function parseBillOcrText(text: string): ParsedBillData {
       const val = parseFloat(match[1]);
       if (val > 0 && val < 10000) {
         kwh = val;
-        confidence += 0.3;
+        confidence += 0.35;
         rawSnippet = match[0];
         break;
+      }
+    }
+  }
+
+  // If units not matched directly, check Present vs Past meter readings diff
+  if (kwh === 0) {
+    const presentMatch = cleanText.match(/(?:Present|Current|હાલનું)\s*[:=-]?\s*(\d+)/i);
+    const pastMatch = cleanText.match(/(?:Past|Previous|ગત)\s*[:=-]?\s*(\d+)/i);
+    if (presentMatch && pastMatch) {
+      const p = parseFloat(presentMatch[1]);
+      const prev = parseFloat(pastMatch[1]);
+      if (p > prev && (p - prev) < 10000) {
+        kwh = p - prev;
+        confidence += 0.35;
+        rawSnippet = `Present: ${p}, Past: ${prev}, Diff: ${kwh}`;
       }
     }
   }
@@ -71,6 +87,13 @@ export function parseBillOcrText(text: string): ParsedBillData {
       days = parsedDays;
       confidence += 0.1;
     }
+  } else if (
+    /(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[,\-\s]+(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)/i.test(cleanText) ||
+    /BI-?MONTHLY/i.test(cleanText)
+  ) {
+    // Gujarat DISCOM domestic bimonthly billing cycle (2 months = 60 days)
+    days = 60;
+    confidence += 0.1;
   }
 
   // 4. Bill Amount
