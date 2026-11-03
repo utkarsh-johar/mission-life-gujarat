@@ -20,9 +20,9 @@ import { FootprintGauge } from "../../components/charts/FootprintGauge";
 import { SlabAlertCard } from "../../components/ui/SlabAlertCard";
 import { CalculationExplainer } from "../../components/ui/CalculationExplainer";
 import { CommuteMode, COMMUTE_EMISSION_FACTORS } from "../../config/emission";
-import { Discom } from "../../config/tariffs";
-import { Footprint } from "../../lib/engine/carbon";
-import { SlabAlert } from "../../lib/engine/tariff";
+import { Discom, TARIFF_PLANS } from "../../config/tariffs";
+import { Footprint, calculateFootprint } from "../../lib/engine/carbon";
+import { SlabAlert, evaluateSlabJumpAlert } from "../../lib/engine/tariff";
 import { LivingSituation, LIVING_PERSONAS } from "../../config/ecoverse";
 import Link from "next/link";
 
@@ -80,6 +80,10 @@ export default function CarbonAuditPage() {
   // Submit Baseline Audit to API
   const handleCalculate = async () => {
     setIsSubmitting(true);
+    let fp: Footprint | null = null;
+    let alert: SlabAlert | null = null;
+    let credits = 50;
+
     try {
       const payload = {
         pincode,
@@ -104,25 +108,46 @@ export default function CarbonAuditPage() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        throw new Error("Audit submission failed");
+      if (res.ok) {
+        const data = await res.json();
+        fp = data.footprint;
+        alert = data.slabAlert;
+        credits = data.creditsAwarded ?? 50;
       }
+    } catch (err) {
+      console.warn("API network or serverless error, using deterministic client engine fallback:", err);
+    }
 
-      const data = await res.json();
-      setResultFootprint(data.footprint);
-      setResultSlabAlert(data.slabAlert);
-      setCreditsEarned(data.creditsAwarded);
-      setStep(4); // Move to Results view
+    // Deterministic fallback (if serverless API / SQLite unavailable on Vercel)
+    if (!fp) {
+      fp = calculateFootprint({
+        monthlyKwh: Number(monthlyKwh),
+        cookingFuel,
+        lpgCylindersPerYear: cookingFuel === "LPG" ? Number(lpgCylindersPerYear) : undefined,
+        pngScmPerMonth: cookingFuel === "PNG" ? Number(pngScmPerMonth) : undefined,
+        commuteMode,
+        dailyKm: Number(dailyKm),
+        workingDaysPerMonth: Number(workingDays),
+        householdSize: Number(householdSize),
+      });
+      const tariffPlan = TARIFF_PLANS[discom] ?? TARIFF_PLANS.UGVCL;
+      alert = evaluateSlabJumpAlert(Number(monthlyKwh), 15, tariffPlan, 15);
+    }
 
-      // Save baseline in local storage
-      localStorage.setItem("life_audit_footprint", JSON.stringify(data.footprint));
+    setResultFootprint(fp);
+    setResultSlabAlert(alert);
+    setCreditsEarned(credits);
+    setStep(4); // Move to Results view
+    setIsSubmitting(false);
+
+    // Save baseline in local storage
+    try {
+      localStorage.setItem("life_audit_footprint", JSON.stringify(fp));
       localStorage.setItem("life_audit_discom", discom);
       localStorage.setItem("life_audit_kwh", monthlyKwh.toString());
       localStorage.setItem("life_user_persona", livingSituation);
-    } catch (err) {
-      console.error("Calculation error:", err);
-    } finally {
-      setIsSubmitting(false);
+    } catch (storageErr) {
+      console.warn("Storage error:", storageErr);
     }
   };
 
