@@ -36,15 +36,15 @@ export default function HomePage() {
       <section className="w-full max-w-6xl mx-auto px-4 pt-12 pb-16 text-center">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tealbrand-50 dark:bg-tealbrand-950/50 text-tealbrand-700 dark:text-teal-300 text-xs font-bold border border-tealbrand-200 dark:border-tealbrand-800 shadow-xs mb-6">
           <Sparkles className="w-4 h-4 text-solar-500" />
-          <span>Government of Gujarat · GEDA Initiative</span>
+          <span>{t("landing.badge")}</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight max-w-4xl mx-auto leading-tight">
-          Turn India's <span className="text-tealbrand-600">Mission LiFE</span> into a Measurable Daily Habit
+          {t("landing.title")}
         </h1>
 
         <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Measure your household carbon footprint in 30 seconds, trace your rooftop solar power on satellite maps, track verified green commutes, and earn state climate credits.
+          {t("landing.description")}
         </p>
 
         {/* Hero CTAs */}
@@ -53,16 +53,16 @@ export default function HomePage() {
             href="/audit"
             className="px-6 py-3.5 bg-tealbrand-600 hover:bg-tealbrand-700 text-white rounded-2xl text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
           >
-            <span>Check Your Footprint in 30s</span>
+            <span>{t("landing.ctaStart")}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
 
           <Link
-            href="/audit"
+            href="/audit?sample=ugvcl"
             className="px-6 py-3.5 bg-solar-500 hover:bg-solar-600 text-white rounded-2xl text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
           >
             <FileText className="w-4 h-4" />
-            <span>Try with Sample Bill (Instant ≤ 10s)</span>
+            <span>{t("landing.ctaSample")}</span>
           </Link>
 
           <Link
@@ -70,7 +70,7 @@ export default function HomePage() {
             className="px-5 py-3.5 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-2xl text-sm font-semibold transition-colors flex items-center gap-2"
           >
             <Sun className="w-4 h-4 text-solar-500" />
-            <span>Roof-to-Rupee Solar Studio</span>
+            <span>{t("nav.solar")}</span>
           </Link>
 
           <Link
@@ -78,7 +78,7 @@ export default function HomePage() {
             className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
           >
             <Sparkles className="w-4 h-4 text-solar-300" />
-            <span>EcoVerse & Virtual Island</span>
+            <span>{t("nav.ecoverse")}</span>
           </Link>
         </div>
 
@@ -89,7 +89,7 @@ export default function HomePage() {
               {metrics ? `${metrics.kpis?.totalTonnesCo2 || 140}` : "142.5"}
             </div>
             <div className="text-xs text-slate-500 mt-1 font-medium">
-              Tonnes CO₂ Avoided in Gujarat
+              {t("landing.stat1Label")}
             </div>
           </div>
 
@@ -98,7 +98,7 @@ export default function HomePage() {
               {metrics ? `${metrics.kpis?.totalPotentialKw || 1850}` : "1,850"} <span className="text-sm">kW</span>
             </div>
             <div className="text-xs text-slate-500 mt-1 font-medium">
-              Solar Rooftop Potential Mapped
+              {t("landing.stat3Label")}
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export default function HomePage() {
               42
             </div>
             <div className="text-xs text-slate-500 mt-1 font-medium">
-              Wards Mapped Across 4 Cities
+              {t("landing.stat2Label")}
             </div>
           </div>
 
@@ -144,10 +144,10 @@ export default function HomePage() {
                 Module A · Baseline & Tariff
               </span>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-                30-Second Baseline & Slab-Jump Alert
+                {t("landing.feature1Title")}
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                Enter your Gujarat PIN code and units or upload an electricity bill. Our GERC tariff engine projects whether you're about to jump into a higher tariff slab and calculates exact ₹ savings.
+                {t("landing.feature1Desc")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-slate-500">
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800">0.82 kg CO₂/kWh (CEA)</span>
@@ -175,10 +175,10 @@ export default function HomePage() {
                 Module B · Flagship Studio
               </span>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-                "Roof-to-Rupee" Solar Polygon Studio
+                {t("landing.feature2Title")}
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                Click and drag vertices on high-resolution Esri satellite imagery to outline your roof. Turf calculates exact m², live Open-Meteo GHI computes solar yield, and PM Surya Ghar subsidy rules compute ₹78,000 CFA.
+                {t("landing.feature2Desc")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-slate-500">
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800">Esri Imagery</span>
@@ -206,10 +206,10 @@ export default function HomePage() {
                 Module C · Live Telemetry
               </span>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-                GPS Mobility Tracker & Weather Nudges
+                {t("landing.feature3Title")}
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                Record your commute with real-time speedometers, Haversine filters, and CO₂ tickers. Includes a 5x simulation mode replaying Ahmedabad routes for desk judging, plus temperature-triggered AC-off challenges.
+                {t("landing.feature3Desc")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-slate-500">
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800">Speedometer Gauge</span>
@@ -237,10 +237,10 @@ export default function HomePage() {
                 Module D · State Administration
               </span>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-                GEDA State Command War-Room
+                {t("landing.feature4Title")}
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                Municipal ward leaderboard ranking Ahmedabad, Surat, Vadodara, and Gandhinagar by composite LiFE scores. State officers view solar conversion funnels, launch statewide challenges, and export CSVs.
+                {t("landing.feature4Desc")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-slate-500">
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800">42 Ward Scorecards</span>

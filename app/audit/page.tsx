@@ -24,14 +24,34 @@ import { Discom, TARIFF_PLANS } from "../../config/tariffs";
 import { Footprint, calculateFootprint } from "../../lib/engine/carbon";
 import { SlabAlert, evaluateSlabJumpAlert } from "../../lib/engine/tariff";
 import { LivingSituation, LIVING_PERSONAS } from "../../config/ecoverse";
+import { useI18n } from "../../lib/i18n";
 import Link from "next/link";
 
 export default function CarbonAuditPage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   // Step state (1: Location, 2: Energy, 3: Travel, 4: Result)
   const [step, setStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Auto-detect sample bill intent from URL query
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const sample = params.get("sample");
+      const mode = params.get("mode");
+      if (sample || mode === "sample") {
+        setPincode("380009");
+        setCity("Ahmedabad");
+        setDiscom(sample === "torrent" ? "TORRENT_POWER" : sample === "dgvcl" ? "DGVCL" : "UGVCL");
+        setWardName("Navrangpura (Central)");
+        setWardId("AMD-NAV");
+        setMonthlyKwh(sample === "torrent" ? 260 : sample === "dgvcl" ? 185 : 214);
+        setStep(2); // Jump directly to Step 2: Energy & Sample Bill
+      }
+    }
+  }, []);
 
   // Form Fields
   const [pincode, setPincode] = useState("380001");
@@ -167,7 +187,7 @@ export default function CarbonAuditPage() {
           Mission LiFE Gujarat · Module A
         </div>
         <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
-          30-Second Baseline Carbon & Bill Audit
+          {t("audit.title")}
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
           Trace your household energy and commute footprint against official Gujarat benchmarks. Zero appliance sliders.
@@ -179,13 +199,13 @@ export default function CarbonAuditPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between text-xs font-semibold text-slate-500 mb-2">
             <span className={step >= 1 ? "text-tealbrand-700 dark:text-teal-400" : ""}>
-              1. Location & DISCOM
+              {t("audit.step1")}
             </span>
             <span className={step >= 2 ? "text-tealbrand-700 dark:text-teal-400" : ""}>
-              2. Energy & Fuel
+              {t("audit.step2")}
             </span>
             <span className={step >= 3 ? "text-tealbrand-700 dark:text-teal-400" : ""}>
-              3. Daily Travel
+              {t("audit.step3")}
             </span>
           </div>
           <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
